@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class EntradaSalida {
@@ -14,6 +15,13 @@ public class EntradaSalida {
 		System.out.println("Escribe el codigo de provincia que desea consultar:");
 		System.out.println("Codigo --- Provincia");
 		provincias.forEach((k,v) -> System.out.println("  "+ k + "   ---   " + v));		
+	}
+
+	public static void mostrarMunis(List<String> municipios, String provincia) {
+		System.out.println("Los municipios de "+provincia+" son:");
+		for (String string : municipios) {
+			System.out.println(string);
+		}
 	}
 	
 	

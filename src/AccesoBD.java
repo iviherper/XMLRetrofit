@@ -3,7 +3,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class AccesoBD {
@@ -64,6 +66,39 @@ public class AccesoBD {
 			e.printStackTrace();
 		}
 		return provs;
+	}
+	public static List<String> getMunicipios(String provincia) {
+		Statement sm;
+		List<String> munis = new ArrayList();
+		try {
+			sm = crearConexion().createStatement();
+			ResultSet rs = sm.executeQuery("Select * from municipios where provincia='"+provincia+"'");
+			while(rs.next()) {
+				munis.add(rs.getString(1));
+			}
+			crearConexion().close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return munis;
+	}
+	public static void insertarMunis(Municipiero m, String provincia) {
+		Statement sm;
+		try {
+			sm = crearConexion().createStatement();
+			if(m.getMuni()==null) {
+				System.out.println("m es nul");
+			}else {
+			for (Muni mu : m.getMuni()) {
+				sm.executeUpdate("Insert into municipios (muni,provincia) values ('"+mu.getNm()+"','"+provincia+"')");
+			}
+			}		
+			crearConexion().close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 
 }
